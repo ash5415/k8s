@@ -1,0 +1,1161 @@
+<!doctype html><!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en-us" > <![endif]--><!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en-us" >        <![endif]--><!--[if IE 8]>    <html class="no-js lt-ie9" lang="en-us" >               <![endif]--><!--[if gt IE 8]><!--><html class="no-js" lang="en-us"><!--<![endif]--><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="author" content="Blue Matador, Inc.">
+    <meta name="description" content="Kubectl is the command line configuration tool for Kubernetes. Our kubectl cheatsheet provides an overview of the most useful commands for K8s objects.">
+    <meta name="generator" content="HubSpot">
+    <title>Kubectl Cheatsheet | Free Cheatsheet</title>
+    <link rel="shortcut icon" href="https://www.bluematador.com/hubfs/favicon-64x64.ico">
+    
+
+    <script src="/hs/hsstatic/jquery-libs/static-1.1/jquery/jquery-1.7.1.js"></script>
+<script>hsjQuery = window['jQuery'];</script>
+    <meta property="og:description" content="Kubectl is the command line configuration tool for Kubernetes. Our kubectl cheatsheet provides an overview of the most useful commands for K8s objects.">
+    <meta property="og:title" content="Kubectl Cheatsheet | Free Cheatsheet">
+    <meta name="twitter:description" content="Kubectl is the command line configuration tool for Kubernetes. Our kubectl cheatsheet provides an overview of the most useful commands for K8s objects.">
+    <meta name="twitter:title" content="Kubectl Cheatsheet | Free Cheatsheet">
+
+    
+
+    
+    <style>
+a.cta_button{-moz-box-sizing:content-box !important;-webkit-box-sizing:content-box !important;box-sizing:content-box !important;vertical-align:middle}.hs-breadcrumb-menu{list-style-type:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px}.hs-breadcrumb-menu-item{float:left;padding:10px 0px 10px 10px}.hs-breadcrumb-menu-divider:before{content:'›';padding-left:10px}.hs-featured-image-link{border:0}.hs-featured-image{float:right;margin:0 0 20px 20px;max-width:50%}@media (max-width: 568px){.hs-featured-image{float:none;margin:0;width:100%;max-width:100%}}.hs-screen-reader-text{clip:rect(1px, 1px, 1px, 1px);height:1px;overflow:hidden;position:absolute !important;width:1px}
+</style>
+
+<link rel="stylesheet" href="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/module_assets/26165815909/1661334508024/module_26165815909_2020-header.min.css">
+<link rel="stylesheet" href="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/module_assets/28885060560/1590611250525/module_28885060560_Azul_Glossary_Navigation.min.css">
+<link rel="stylesheet" href="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/module_assets/27312402427/1585694601148/module_27312402427_2020_H1.min.css">
+    
+
+    
+    <link rel="canonical" href="https://www.bluematador.com/learn/kubectl-cheatsheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MHB9T2Z');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" sizes="60x60" href="/hubfs/favicons/apple-touch-icon-60x60.png?v=xQzbaM088X">
+<link rel="apple-touch-icon" sizes="76x76" href="/hubfs/favicons/apple-touch-icon-76x76.png?v=xQzbaM088X">
+<link rel="apple-touch-icon" sizes="120x120" href="/hubfs/favicons/apple-touch-icon-120x120.png?v=xQzbaM088X">
+<link rel="apple-touch-icon" sizes="152x152" href="/hubfs/favicons/apple-touch-icon-152x152.png?v=xQzbaM088X">
+<link rel="apple-touch-icon" sizes="180x180" href="/hubfs/favicons/apple-touch-icon-180x180.png?v=xQzbaM088X">
+<link rel="icon" type="image/png" sizes="32x32" href="/hubfs/favicons/favicon-32x32.png?v=xQzbaM088X">
+<link rel="icon" type="image/png" sizes="16x16" href="/hubfs/favicons/favicon-16x16.png?v=xQzbaM088X">
+<link rel="manifest" href="/hubfs/favicons/site.webmanifest?v=xQzbaM088X">
+<link rel="mask-icon" href="/hubfs/favicons/safari-pinned-tab.svg?v=xQzbaM088X" color="#0093ee">
+<link rel="shortcut icon" href="/hubfs/favicons/favicon.ico?v=xQzbaM088X">
+<meta name="apple-mobile-web-app-title" content="Blue Matador">
+<meta name="application-name" content="Blue Matador">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="msapplication-config" content="/hubfs/favicons/browserconfig.xml?v=xQzbaM088X">
+<meta name="theme-color" content="#ffffff">
+<!-- End Favicons -->
+<meta property="og:image" content="https://www.bluematador.com/hubfs/kubernetes-bluematador.png#keepProtocol">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="675">
+<meta property="og:image:alt" content="Blue Matador plus Kubernetes logos">
+<meta name="twitter:image" content="https://www.bluematador.com/hubfs/kubernetes-bluematador.png#keepProtocol">
+<meta name="twitter:image:alt" content="Blue Matador plus Kubernetes logos">
+
+<meta property="og:url" content="https://www.bluematador.com/learn/kubectl-cheatsheet">
+<meta name="twitter:card" content="summary_large_image">
+<meta http-equiv="content-language" content="en-us">
+<link rel="stylesheet" href="//cdn2.hubspot.net/hub/7052064/hub_generated/template_assets/1689965053238/hubspot/hubspot_default/shared/responsive/layout.min.css">
+
+
+<link rel="stylesheet" href="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/template_assets/5470550935/1578503469638/Coded_files/Custom/page/css/owl.min.css">
+<link rel="stylesheet" href="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/template_assets/5426786824/1578503465698/Coded_files/Custom/blog/css/prism.min.css">
+<link rel="stylesheet" href="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/template_assets/7200472074/1585856042640/Azul-BlueMatador_landingpage/Azul-BlueMatador/Azul-Docs/Azul-docs.min.css">
+<link rel="stylesheet" href="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/template_assets/6398401986/1578503467280/Coded_files/Custom/page/css/chocolat.css">
+
+
+    <script src="https://www.bluematador.com/hubfs/js/external/prism.js"></script>
+
+    
+
+</head>
+<body class="site-page one-column about-layout request-demo no-padding homepage   hs-content-id-29791267119 hs-site-page page " style="">
+    <div class="header-container-wrapper">
+    <div class="header-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1585764210585255" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><header class="bm-header">
+  <div class="bm-header-main">
+    <div class="bm-header-left">
+      <a class="bm-header-brand" href="https://www.bluematador.com">
+        <img src="https://www.bluematador.com/hubfs/bluematador-logo-main-blk.svg">
+      </a>
+      <ul class="bm-header-main-links">
+        <li>
+          <a>MONITORING</a>
+          <ul>
+            <li><a href="https://www.bluematador.com/aws-monitoring">AWS monitoring</a></li>
+            <li><a href="https://www.bluematador.com/kubernetes-monitoring">Kubernetes monitoring</a></li>
+            <li><a href="https://www.bluematador.com/serverless">Serverless monitoring</a></li>
+            <li><a href="https://www.bluematador.com/azure-monitoring">Azure monitoring</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>WHY US</a>
+          <ul>
+            <li><a href="https://www.bluematador.com/how-it-works">How it works</a></li>
+            <li><a href="https://www.bluematador.com/l/blue-matador-vs-competitors">Competitors</a></li>
+            <li><a href="https://www.bluematador.com/customers">Customers</a></li>
+            <li><a href="https://www.bluematador.com/about">About us</a></li>
+          </ul>
+        </li>
+         <li>
+          <a href="https://www.bluematador.com/pricing">PRICING</a>
+           <ul>
+            <li><a href="https://www.bluematador.com/pricing">What it costs</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>RESOURCES</a>
+          <ul>
+            <li><a href="https://help.bluematador.com/en/collections/2186310-getting-started" target="_blank">Getting started</a></li>
+            <li><a href="https://www.bluematador.com/blog">Blog</a></li>
+            <li><a href="https://www.bluematador.com/ebooks">eBooks</a></li>
+            <li><a href="https://www.bluematador.com/docs">Docs</a></li>
+            <li><a href="https://www.bluematador.com/learn/aws">Learn AWS</a></li>
+            <li><a href="https://www.bluematador.com/learn/kubernetes">Learn Kubernetes</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="bm-header-right">
+    <!--HubSpot Call-to-Action Code --><span class="hs-cta-wrapper" id="hs-cta-wrapper-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859"><span class="hs-cta-node hs-cta-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859" id="hs-cta-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859"><!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]--><a href="https://cta-redirect.hubspot.com/cta/redirect/3917309/e7240f3b-5dcc-4ab5-8991-1ab4b60e0859"><img class="hs-cta-img" id="hs-cta-img-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859" style="margin-right:20px; border-width:0px;" src="https://no-cache.hubspot.com/cta/default/3917309/e7240f3b-5dcc-4ab5-8991-1ab4b60e0859.png" alt="TRY BLUE MATADOR"></a></span><script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script><script type="text/javascript"> hbspt.cta.load(3917309, 'e7240f3b-5dcc-4ab5-8991-1ab4b60e0859', {}); </script></span><!-- end HubSpot Call-to-Action Code -->
+      <a href="https://app.bluematador.com/ur/signin">
+        Sign In
+      </a>
+    </div>
+  </div>
+  <div class="bm-header-mobile">
+    <div class="bm-header-mobile-top">
+      <a href="https://www.bluematador.com">
+        <img src="https://www.bluematador.com/hubfs/bluematador-logo-main-blk.svg">
+      </a>
+      <a id="mobile-toggle" class="bm-header-mobile-menu"></a>
+    </div>
+    <div class="bm-header-mobile-links">
+      <div class="bm-header-mobile-buttons">
+     <!--HubSpot Call-to-Action Code --><span class="hs-cta-wrapper" id="hs-cta-wrapper-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859"><span class="hs-cta-node hs-cta-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859" id="hs-cta-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859"><!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]--><a href="https://cta-redirect.hubspot.com/cta/redirect/3917309/e7240f3b-5dcc-4ab5-8991-1ab4b60e0859"><img class="hs-cta-img" id="hs-cta-img-e7240f3b-5dcc-4ab5-8991-1ab4b60e0859" style="margin-right:20px; border-width:0px;" src="https://no-cache.hubspot.com/cta/default/3917309/e7240f3b-5dcc-4ab5-8991-1ab4b60e0859.png" alt="TRY BLUE MATADOR"></a></span><script charset="utf-8" src="https://js.hscta.net/cta/current.js"></script><script type="text/javascript"> hbspt.cta.load(3917309, 'e7240f3b-5dcc-4ab5-8991-1ab4b60e0859', {}); </script></span><!-- end HubSpot Call-to-Action Code -->
+        <a href="https://app.bluematador.com/ur/signin">
+          Sign In
+        </a>
+      </div>
+      <ul>
+        <li>
+          <a>MONITORING</a>
+          <ul>
+            <li><a href="https://www.bluematador.com/aws-monitoring">AWS monitoring</a></li>
+            <li><a href="https://www.bluematador.com/kubernetes-monitoring">Kubernetes monitoring</a></li>
+            <li><a href="https://www.bluematador.com/serverless">Serverless monitoring</a></li>
+            <li><a href="https://www.bluematador.com/azure-monitoring">Azure monitoring</a></li>
+          </ul>
+        </li>
+         <li>
+          <a>WHY US</a>
+          <ul>
+            <li><a href="https://www.bluematador.com/how-it-works">How it works</a></li>
+            <li><a href="https://www.bluematador.com/l/blue-matador-vs-competitors">Competitors</a></li>
+            <li><a href="https://www.bluematador.com/customers">Customers</a></li>
+            <li><a href="https://www.bluematador.com/about">About us</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>PRICING</a>
+          <ul>
+            <li><a href="https://www.bluematador.com/pricing?hsLang">What it costs</a></li>
+          </ul>
+        </li>
+        <li>
+          <a>RESOURCES</a>
+          <ul>
+            <li><a href="https://help.bluematador.com/en/collections/2186310-getting-started">Getting started</a></li>
+            <li><a href="https://www.bluematador.com/blog">Blog</a></li>
+            <li><a href="https://www.bluematador.com/ebooks">eBooks</a></li>
+            <li><a href="https://www.bluematador.com/docs">Docs</a></li>
+            <li><a href="https://www.bluematador.com/learn/aws">Learn AWS</a></li>
+            <li><a href="https://www.bluematador.com/learn/kubernetes">Learn Kubernetes</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end header -->
+</div><!--end header wrapper -->
+
+<div class="body-container-wrapper">
+    <div class="body-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell background-fixed-cover" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 60px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_152183800672699" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell background-fixed-cover" style="background-image: url(https://www.bluematador.com/hubfs/www/home/bluenatador-ltbluehead-background2-1x.png); background-position: 0px; background-attachment: fixed; background-size: 100%; position:fixed;top:60px;left:0;right:0;" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 15px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_152183800304697" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-5 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-6 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center-1280" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-7 ">
+<div class="row-fluid ">
+<div class="span3 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="3">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-8 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1588115069345108" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><div class="azul-docs-nav" x-data-nestable="false">
+  <div class="azul-docs-nav-mobile">Contents</div>
+  <div class="azul-docs-nav-menu"></div>
+</div></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+<div class="span9 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="3" data-w="9">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-9 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1588028206019739" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><div class="">
+  <h1 style="color:#0093ec;font-weight:500;opacity:100;">
+    Kubectl Command Cheatsheet
+  </h1>
+</div></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-10 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="padding: 5px" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_15475973884231724" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-space widget-type-space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span class="hs-horizontal-spacer"></span></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-11 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1588027022783644" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_module_1588027022783644_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p>Kubectl is the command line configuration tool for Kubernetes that communicates with a Kubernetes API server. Using Kubectl allows you to create, inspect, update, and delete Kubernetes objects. This cheatsheet will serve as a quick reference to make commands on many common Kubernetes components and resources. You can use the full command for an object on things like pod(s) or the shortcode variation mentioned in parantheses in the heading of each section. They will all generate the same outcome. You'll also want to be sure to follow up most of the commands with the specific &lt;name&gt; of the resource you are managing.</p></span></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-12 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="padding: 25px;" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1547593309877983" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-space widget-type-space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span class="hs-horizontal-spacer"></span></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-13 ">
+<div class="row-fluid ">
+<div class="span3 widget-span widget-type-space " style="padding: 50px;" data-widget-type="space" data-x="0" data-w="3">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1522091179083139" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+<div id="cluster-management" class="span9 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="3" data-w="9">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-14 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1588089319145250" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text widget-type-rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_module_1588089319145250_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><h2>Cluster Management</h2>
+<p>Display endpoint information about the master and services in the cluster</p>
+<pre><code class="language-json">kubectl cluster-info</code></pre>
+<p>&nbsp;</p>
+<p>Display the Kubernetes version running on the client and server</p>
+<pre><code class="language-json">kubectl version</code></pre>
+<p>&nbsp;</p>
+<p>Get the configuration of the cluster</p>
+<pre><code class="language-json">kubectl config view</code></pre>
+<p>&nbsp;</p>
+<p>List the API resources that are available</p>
+<pre><code class="language-json">kubectl api-resources</code></pre>
+<p>&nbsp;</p>
+<p>List the API versions that are available</p>
+<pre><code class="language-json">kubectl api-versions</code></pre>
+<p>&nbsp;</p>
+<p>List everything</p>
+<pre><code class="language-json">kubectl get all --all-namespaces</code></pre>
+<p>&nbsp;</p>
+<h2>Daemonsets</h2>
+<p><strong>Shortcode = ds</strong></p>
+<p>List one or more daemonsets</p>
+<pre><code class="language-json">kubectl get daemonset</code></pre>
+<p>&nbsp;</p>
+<p>Edit and update the definition of one or more daemonset</p>
+<pre><code class="language-json">kubectl edit daemonset &lt;daemonset_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Delete a daemonset</p>
+<pre><code class="language-json">kubectl delete daemonset &lt;daemonset_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Create a new daemonset</p>
+<pre><code class="language-json">kubectl create daemonset &lt;daemonset_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Manage the rollout of a daemonset</p>
+<pre><code class="language-json">kubectl rollout daemonset</code></pre>
+<p>&nbsp;</p>
+<p>Display the detailed state of daemonsets within a namespace</p>
+<pre><code class="language-json">kubectl describe ds &lt;daemonset_name&gt; -n &lt;namespace_name&gt;</code></pre>
+<p>&nbsp;</p>
+<h2>Deployments</h2>
+<p><strong>Shortcode = deploy</strong></p>
+<p>List one or more deployments</p>
+<pre><code class="language-json">kubectl get deployment</code></pre>
+<p>&nbsp;</p>
+<p>Display the detailed state of one or more deployments</p>
+<pre><code class="language-json">kubectl describe deployment &lt;deployment_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Edit and update the definition of one or more deployment on the server</p>
+<pre><code class="language-json">kubectl edit deployment &lt;deployment_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Create one a new deployment</p>
+<pre><code class="language-json">kubectl create deployment &lt;deployment_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Delete deployments</p>
+<pre><code class="language-json">kubectl delete deployment &lt;deployment_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>See the rollout status of a deployment</p>
+<pre><code class="language-json">kubectl rollout status deployment &lt;deployment_name&gt;</code></pre>
+<p>&nbsp;</p>
+<h2>Events</h2>
+<p><strong>Shortcode = ev</strong></p>
+<p>List recent events for all resources in the system</p>
+<pre><code class="language-json">kubectl get events</code></pre>
+<p>&nbsp;</p>
+<p>List Warnings only</p>
+<pre><code class="language-json">kubectl get events --field-selector type=Warning</code></pre>
+<p>&nbsp;</p>
+<p>List events but exclude Pod events</p>
+<pre><code class="language-json">kubectl get events --field-selector involvedObject.kind!=Pod</code></pre>
+<p>&nbsp;</p>
+<p>Pull events for a single node with a specific name</p>
+<pre><code class="language-json">kubectl get events --field-selector involvedObject.kind=Node, involvedObject.name=&lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Filter out normal events from a list of events</p>
+<pre><code class="language-json">kubectl get events --field-selector type!=Normal</code></pre>
+<p>&nbsp;</p>
+<h2>Logs</h2>
+<p>Print the logs for a pod</p>
+<pre><code class="language-json">kubectl logs &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Print the logs for the last hour for a pod</p>
+<pre><code class="language-json">kubectl logs --since=1h &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Get the most recent 20 lines of logs</p>
+<pre><code class="language-json">kubectl logs --tail=20 &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Get logs from a service and optionally select which container</p>
+<pre><code class="language-json">kubectl logs -f &lt;service_name&gt; [-c &lt;$container&gt;]</code></pre>
+<p>&nbsp;</p>
+<p>Print the logs for a pod and follow new logs</p>
+<pre><code class="language-json">kubectl logs -f &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Print the logs for a container in a pod</p>
+<pre><code class="language-json">kubectl logs -c &lt;container_name&gt; &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Output the logs for a pod into a file named ‘pod.log’</p>
+<pre><code class="language-json">kubectl logs &lt;pod_name&gt; pod.log</code></pre>
+<p>&nbsp;</p>
+<p>View the logs for a previously failed pod</p>
+<pre><code class="language-json">kubectl logs --previous &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>For logs we also recommend using a tool developed by Johan Haleby called Kubetail. This is a bash script that will allow you to get logs from multiple pods simultaneously. You can learn more about it at its <a href="https://github.com/johanhaleby/kubetail">Github repository.</a> Here are some sample commands using Kubetail.</p>
+<p>&nbsp;</p>
+<p>Get logs for all pods named with pod_prefix</p>
+<pre><code class="language-json">kubetail &lt;pod_prefix&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Include the most recent 5 minutes of logs</p>
+<pre><code class="language-json">kubetail &lt;pod_prefix&gt; -s 5m</code></pre>
+<p>&nbsp;</p>
+<h2>Manifest Files&nbsp;</h2>
+<p>Another option for modifying objects is through Manifest Files. We highly recommend using this method. It is done by using yaml files with all the necessary options for objects configured. We have our yaml files stored in a git repository, so we can track changes and streamline changes.</p>
+<p>&nbsp;</p>
+<p>Apply a configuration to an object by filename or stdin. Overrides the existing configuration.</p>
+<pre><code class="language-json">kubectl apply -f manifest_file.yaml</code></pre>
+<p>&nbsp;</p>
+<p>Create objects</p>
+<pre><code class="language-json">kubectl create -f manifest_file.yaml</code></pre>
+<p>&nbsp;</p>
+<p>Create objects in all manifest files in a directory</p>
+<pre><code class="language-json">kubectl create -f ./dir</code></pre>
+<p>&nbsp;</p>
+<p>Create objects from a URL</p>
+<pre><code class="language-json">kubectl create -f ‘url’</code></pre>
+<p>&nbsp;</p>
+<p>Delete an object</p>
+<pre><code class="language-json">kubectl delete -f manifest_file.yaml</code></pre>
+<p>&nbsp;</p>
+<h2>Namespaces</h2>
+<p><strong>Shortcode = ns</strong></p>
+<p>Create namespace &lt;name&gt;</p>
+<pre><code class="language-json">kubectl create namespace &lt;namespace_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>List one or more namespaces</p>
+<pre><code class="language-json">kubectl get namespace &lt;namespace_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Display the detailed state of one or more namespace</p>
+<pre><code class="language-json">kubectl describe namespace &lt;namespace_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Delete a namespace</p>
+<pre><code class="language-json">kubectl delete namespace &lt;namespace_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Edit and update the definition of a namespace</p>
+<pre><code class="language-json">kubectl edit namespace &lt;namespace_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Display Resource (CPU/Memory/Storage) usage for a namespace</p>
+<pre><code class="language-json">kubectl top namespace &lt;namespace_name&gt;</code></pre>
+<p>&nbsp;</p>
+<h2>Nodes</h2>
+<p><strong>Shortcode = no</strong></p>
+<p>Update the taints on one or more nodes</p>
+<pre><code class="language-json">kubectl taint node &lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>List one or more nodes</p>
+<pre><code class="language-json">kubectl get node</code></pre>
+<p>&nbsp;</p>
+<p>Delete a node or multiple nodes</p>
+<pre><code class="language-json">kubectl delete node &lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Display Resource usage (CPU/Memory/Storage) for nodes</p>
+<pre><code class="language-json">kubectl top node</code></pre>
+<p>&nbsp;</p>
+<p>Resource allocation per node</p>
+<pre><code class="language-json">kubectl describe nodes | grep Allocated -A 5</code></pre>
+<p>&nbsp;</p>
+<p>Pods running on a node</p>
+<pre><code class="language-json">kubectl get pods -o wide | grep &lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Annotate a node</p>
+<pre><code class="language-json">kubectl annotate node &lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Mark a node as unschedulable</p>
+<pre><code class="language-json">kubectl cordon node &lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Mark node as schedulable</p>
+<pre><code class="language-json">kubectl uncordon node &lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Drain a node in preparation for maintenance</p>
+<pre><code class="language-json">kubectl drain node &lt;node_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Add or update the labels of one or more nodes</p>
+<pre><code class="language-json">kubectl label node</code></pre>
+<p>&nbsp;</p>
+<h2>Pods</h2>
+<p><strong>Shortcode = po</strong></p>
+<p>List one or more pods</p>
+<pre><code class="language-json">kubectl get pod</code></pre>
+<p>&nbsp;</p>
+<p>Delete a pod</p>
+<pre><code class="language-json">kubectl delete pod &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Display the detailed state of a pods</p>
+<pre><code class="language-json">kubectl describe pod &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Create a pod</p>
+<pre><code class="language-json">kubectl create pod &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Execute a command against a container in a pod</p>
+<pre><code class="language-json">kubectl exec &lt;pod_name&gt; -c &lt;container_name&gt; &lt;command&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Get interactive shell on a a single-container pod</p>
+<pre><code class="language-json">kubectl exec -it &lt;pod_name&gt; /bin/sh</code></pre>
+<p>&nbsp;</p>
+<p>Display Resource usage (CPU/Memory/Storage) for pods</p>
+<pre><code class="language-json">kubectl top pod</code></pre>
+<p>&nbsp;</p>
+<p>Add or update the annotations of a pod</p>
+<pre><code class="language-json">kubectl annotate pod &lt;pod_name&gt; &lt;annotation&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Add or update the label of a pod</p>
+<pre><code class="language-json">kubectl label pod &lt;pod_name&gt;</code></pre>
+<p>&nbsp;</p>
+<h2>Replication Controllers</h2>
+<p><strong>Shortcode = rc</strong></p>
+<p>List the replication controllers</p>
+<pre><code class="language-json">kubectl get rc</code></pre>
+<p>&nbsp;</p>
+<p>List the replication controllers by namespace</p>
+<pre><code class="language-json">kubectl get rc --namespace=”&lt;namespace_name&gt;”</code></pre>
+<p>&nbsp;</p>
+<h2>ReplicaSets</h2>
+<p><strong>Shortcode = rs</strong></p>
+<p>List ReplicaSets</p>
+<pre><code class="language-json">kubectl get replicasets</code></pre>
+<p>&nbsp;</p>
+<p>Display the detailed state of one or more ReplicaSets</p>
+<pre><code class="language-json">kubectl describe replicasets &lt;replicaset_name&gt;</code></pre>
+<p>&nbsp;</p>
+<p>Scale a ReplicaSet</p>
+<pre><code class="language-json">kubectl scale --replicas=[x]&nbsp;</code></pre>
+<p>&nbsp;</p>
+<h2>Secrets</h2>
+<p>Create a secret</p>
+<pre><code class="language-json">kubectl create secret</code></pre>
+<p>&nbsp;</p>
+<p>List secrets</p>
+<pre><code class="language-json">kubectl get secrets</code></pre>
+<p>&nbsp;</p>
+<p>List details about secrets</p>
+<pre><code class="language-json">kubectl describe secrets</code></pre>
+<p>&nbsp;</p>
+<p>Delete a secret</p>
+<pre><code class="language-json">kubectl delete secret &lt;secret_name&gt;</code></pre>
+<p>&nbsp;</p>
+<h2>Services</h2>
+<p><strong>Shortcode = svc</strong></p>
+<p>List one or more services</p>
+<pre><code class="language-json">kubectl get services</code></pre>
+<p>&nbsp;</p>
+<p>Display the detailed state of a service</p>
+<pre><code class="language-json">kubectl describe services</code></pre>
+<p>&nbsp;</p>
+<p>Expose a replication controller, service, deployment or pod as a new Kubernetes service</p>
+<pre><code class="language-json">kubectl expose deployment [deployment_name]</code></pre>
+<p>&nbsp;</p>
+<p>Edit and update the definition of one or more services</p>
+<pre><code class="language-json">kubectl edit services</code></pre>
+<p>&nbsp;</p>
+<h2>Service Accounts</h2>
+<p><strong>Shortcode = sa</strong></p>
+<p>List service accounts</p>
+<pre><code class="language-json">kubectl get serviceaccounts</code></pre>
+<p>&nbsp;</p>
+<p>Display the detailed state of one or more service accounts</p>
+<pre><code class="language-json">kubectl describe serviceaccounts</code></pre>
+<p>&nbsp;</p>
+<p>Replace a service account</p>
+<pre><code class="language-json">kubectl replace serviceaccount</code></pre>
+<p>&nbsp;</p>
+<p>Delete a service account</p>
+<pre><code class="language-json">kubectl delete serviceaccount &lt;service_account_name&gt;</code></pre>
+<p>&nbsp;</p>
+<h2>StatefulSet</h2>
+<p><strong>Shortcode = sts</strong></p>
+<p>List StatefulSet</p>
+<pre><code class="language-json">kubectl get statefulset</code></pre>
+<p>&nbsp;</p>
+<p>Delete StatefulSet only (not pods)</p>
+<pre><code class="language-json">kubectl delete statefulset/[stateful_set_name] --cascade=false</code></pre>
+<p>&nbsp;</p>
+<h2>Common Options</h2>
+<p>In Kubectl you can specify optional flags with commands. Here are some of the most common and useful ones.</p>
+<p>&nbsp;</p>
+<p>-o Output format. For example if you wanted to list all of the pods in ps output format with more information.</p>
+<pre><code class="language-json">kubectl get pods -o wide&nbsp;</code></pre>
+<p>&nbsp;</p>
+<p>-n Shorthand for --namespace. For example, if you’d like to list all the Pods in a specific Namespace you would do this command:</p>
+<pre><code class="language-json">kubectl get pods --namespace=[namespace_name]</code></pre>
+<p>&nbsp;</p>
+<pre><code class="language-json">kubectl get pods -n=[namespace_name]</code></pre>
+<p>&nbsp;</p>
+<p>-f Filename, directory, or URL to files to use to create a resource. For example when creating a pod using data in a file named newpod.json.</p>
+<pre><code class="language-json">kubectl create -f ./newpod.json</code></pre>
+<p>&nbsp;</p>
+<p>-l Selector to filter on, supports ‘=’, ‘==’, and ‘!=’.</p>
+<p>&nbsp;</p>
+<p>Help for kubectl</p>
+<p>-h</p>
+<p>&nbsp;</p></span></div>
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-15 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 50px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1588098633318797" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span></div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end body -->
+</div><!--end body wrapper -->
+
+<div class="footer-container-wrapper">
+    <div class="footer-container container-fluid">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-global_group " style="" data-widget-type="global_group" data-x="0" data-w="12">
+<div class="" data-global-widget-path="generated_global_groups/27788306922.html"><div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell footer-style" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell " style="margin-top: -60px; margin-bottom: -0px; position: relative; " data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-3 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-1 row-number-4 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell background-fixed-cover" style="background: #061120;" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-2 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-2 row-number-2 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell page-center-1280" style="padding: 0 0 0 20px;" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-2 row-number-3 ">
+    <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 10px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712952" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span></div><!--end layout-widget-wrapper -->
+       </div><!--end widget-span -->
+        </div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-2 row-number-4 ">
+    <div class="row-fluid ">
+<div class="span4 widget-span widget-type-cell bm-mobile-2cols" style="" data-widget-type="cell" data-x="0" data-w="4">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-1 ">
+        <div class="row-fluid ">
+<div class="span6 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="6">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-2 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text " style="" data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712954" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p class="p1" style="font-size: 12px;"><span class="s1" style="color: #ffffff;"><strong>MONITORING</strong></span><a href="https://www.bluematador.com/aws-monitoring" rel=" noopener"></a></p>
+<p class="p1" style="font-size: 12px;"><a href="https://www.bluematador.com/aws-monitoring" rel=" noopener">AWS monitoring</a><br><a href="https://www.bluematador.com/kubernetes-monitoring" rel=" noopener"></a></p>
+<p class="p1" style="font-size: 12px;"><a href="https://www.bluematador.com/kubernetes-monitoring" rel=" noopener">Kubernetes monitoring</a></p>
+<p class="p1" style="font-size: 12px;"><a href="https://www.bluematador.com/serverless" rel=" noopener">Serverless monitoring</a></p>
+<p class="p1" style="font-size: 12px;"><a href="https://www.bluematador.com/azure-monitoring" rel=" noopener">Azure monitoring</a></p></span>
+     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-3 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 5px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712955" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span>     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+           </div><!--end widget-span -->
+<div class="span6 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="6" data-w="6">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-4 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text " style="" data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712957" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p class="p1" style="font-size: 12px;"><span class="s1" style="color: #ffffff;"><strong>WHY BLUE MATADOR</strong></span></p>
+<p style="font-size: 12px; line-height: 2.5;"><a href="https://www.bluematador.com/pricing" rel=" noopener">Pricing</a><br><a href="https://www.bluematador.com/how-it-works" rel=" noopener">How it works</a><br><a href="https://www.bluematador.com/l/blue-matador-vs-competitors" rel=" noopener">Competitors</a><br><a href="https://www.bluematador.com/customers" rel=" noopener">Customers</a></p></span>
+     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-5 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 5px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712958" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span>     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+       </div><!--end widget-span -->
+<div class="span4 widget-span widget-type-cell bm-mobile-2cols" style="" data-widget-type="cell" data-x="4" data-w="4">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-6 ">
+        <div class="row-fluid ">
+<div class="span6 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="6">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-7 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text " style="" data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712960" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p class="p1" style="font-size: 12px;"><span class="s1" style="color: #ffffff;"><strong>RESOURCES</strong></span></p>
+<p style="font-size: 12px; line-height: 2.5;"><a href="https://www.bluematador.com/blog" rel=" noopener">Blog</a><br><a href="https://www.bluematador.com/ebooks" rel=" noopener">eBooks</a><br>&nbsp; &nbsp; &nbsp; &nbsp;<a href="https://www.bluematador.com/ebook/kubernetes-for-startups" rel=" noopener">Kubernetes </a><br>&nbsp; &nbsp; &nbsp; &nbsp;<a href="https://www.bluematador.com/ebook/amazon-cloudwatch-monitoring-guide" rel=" noopener">Cloudwatch</a><br><a href="https://www.bluematador.com/docs" rel=" noopener">Docs</a><br><a href="https://www.bluematador.com/integrations" rel=" noopener">Integrations</a><br><a href="https://developers.bluematador.com/" rel=" noopener">Developers</a><br><a href="https://www.bluematador.com" p=""></a></p></span>
+     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-8 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 5px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712961" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span>     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+           </div><!--end widget-span -->
+<div class="span6 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="6" data-w="6">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-9 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text " style="" data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712963" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p class="p1" style="font-size: 12px;"><span class="s1" style="color: #ffffff;"><strong>COMPANY</strong></span></p>
+<p style="font-size: 12px; line-height: 2.5;"><a href="https://www.bluematador.com/about" rel=" noopener">About us</a><br><a href="https://bluematador.bamboohr.com/jobs/" rel="noopener" target="_blank">Careers</a><br><a href="https://www.bluematador.com/contact" rel=" noopener">Contact</a></p>
+<p style="font-size: 12px; line-height: 2.5;"><a href="https://help.bluematador.com" rel="noopener" target="_blank"><span style="color: #ffffff;"><strong>SUPPORT</strong></span></a></p></span>
+     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-10 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 5px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712964" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span>     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+       </div><!--end widget-span -->
+<div class="span4 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="8" data-w="4">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-11 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 5px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712966" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span> </div><!--end layout-widget-wrapper -->
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-12 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="text-align:center; padding:0 20px;" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_15839565007152148" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module">
+    
+
+
+
+
+
+
+  
+
+
+
+<span id="hs_cos_wrapper_module_15839565007152148_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_linked_image" style="" data-hs-cos-general-type="widget" data-hs-cos-type="linked_image"><img src="https://www.bluematador.com/hubfs/2020/footer/bluematador-logo-horizontal-reversed-white-footer.svg" class="hs-image-widget " width="250" height="49" style="max-width: 100%; height: auto;" alt="bluematador-logo-horizontal-reversed-white-footer" title="bluematador-logo-horizontal-reversed-white-footer"></span></div>
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-13 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 15px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583964870662692" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span> </div><!--end layout-widget-wrapper -->
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-14 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell bm-mobile-2cols" style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-15 ">
+            <div class="row-fluid ">
+<div class="span6 widget-span widget-type-custom_widget mobile-center" style="text-align:right; padding:0 20px;" data-widget-type="custom_widget" data-x="0" data-w="6">
+<div id="hs_cos_wrapper_module_15839462846261666" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-cta" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_module_15839462846261666_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_cta" style="" data-hs-cos-general-type="widget" data-hs-cos-type="cta"><!--HubSpot Call-to-Action Code --><span class="hs-cta-wrapper" id="hs-cta-wrapper-ccdd6e2d-6352-4c30-9f68-d22b43975967"><span class="hs-cta-node hs-cta-ccdd6e2d-6352-4c30-9f68-d22b43975967" id="hs-cta-ccdd6e2d-6352-4c30-9f68-d22b43975967"><!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]--><a href="https://cta-redirect.hubspot.com/cta/redirect/3917309/ccdd6e2d-6352-4c30-9f68-d22b43975967"><img class="hs-cta-img" id="hs-cta-img-ccdd6e2d-6352-4c30-9f68-d22b43975967" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/3917309/ccdd6e2d-6352-4c30-9f68-d22b43975967.png" alt="START FREE"></a></span><script charset="utf-8" src="/hs/cta/cta/current.js"></script><script type="text/javascript"> hbspt.cta._relativeUrls=true;hbspt.cta.load(3917309, 'ccdd6e2d-6352-4c30-9f68-d22b43975967', {"useNewLoader":"true","region":"na1"}); </script></span><!-- end HubSpot Call-to-Action Code --></span></div>
+
+               </div><!--end widget-span -->
+<div class="span6 widget-span widget-type-custom_widget mobile-center" style="text-align:left padding:0 20px;" data-widget-type="custom_widget" data-x="6" data-w="6">
+<div id="hs_cos_wrapper_module_15839478214321722" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-cta" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span id="hs_cos_wrapper_module_15839478214321722_" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_cta" style="" data-hs-cos-general-type="widget" data-hs-cos-type="cta"><!--HubSpot Call-to-Action Code --><span class="hs-cta-wrapper" id="hs-cta-wrapper-045e18fc-dcbc-4e62-aef2-abe3df55b6d6"><span class="hs-cta-node hs-cta-045e18fc-dcbc-4e62-aef2-abe3df55b6d6" id="hs-cta-045e18fc-dcbc-4e62-aef2-abe3df55b6d6"><!--[if lte IE 8]><div id="hs-cta-ie-element"></div><![endif]--><a href="https://cta-redirect.hubspot.com/cta/redirect/3917309/045e18fc-dcbc-4e62-aef2-abe3df55b6d6"><img class="hs-cta-img" id="hs-cta-img-045e18fc-dcbc-4e62-aef2-abe3df55b6d6" style="border-width:0px;" src="https://no-cache.hubspot.com/cta/default/3917309/045e18fc-dcbc-4e62-aef2-abe3df55b6d6.png" alt="REQUEST&nbsp;DEMO"></a></span><script charset="utf-8" src="/hs/cta/cta/current.js"></script><script type="text/javascript"> hbspt.cta._relativeUrls=true;hbspt.cta.load(3917309, '045e18fc-dcbc-4e62-aef2-abe3df55b6d6', {"useNewLoader":"true","region":"na1"}); </script></span><!-- end HubSpot Call-to-Action Code --></span></div>
+
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-16 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 10px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712967" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span> </div><!--end layout-widget-wrapper -->
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+       </div><!--end widget-span -->
+        </div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-2 row-number-1 ">
+    <div class="row-fluid ">
+<div class="span12 widget-span widget-type-space " style="padding: 5px;" data-widget-type="space" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712968" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="space"></span></div><!--end layout-widget-wrapper -->
+       </div><!--end widget-span -->
+        </div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-2 row-number-2 ">
+    <div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-1 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="padding: 5px;" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1583943767712971" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span class="hs-horizontal-spacer"></span></div>
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-2 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-cell " style="padding: 0px;" data-widget-type="cell" data-x="0" data-w="12">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-3 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="background-color: #253D5D;" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1583943767712973" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span class="hs-horizontal-spacer"></span></div>
+
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-4 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="padding: 5px;" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1583943767712974" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span class="hs-horizontal-spacer"></span></div>
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-5 ">
+        <div class="row-fluid ">
+<div class="span8 widget-span widget-type-rich_text mobile-center" style="padding:0 20px;" data-widget-type="rich_text" data-x="0" data-w="8">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712975" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><p><span style="color: #bfbfbf;"><span style="font-size: 13px; display: inline-block; margin-right: 40px;">© <span id="copy-year"></span> Blue Matador, Inc. All Rights Reserved.</span></span><a href="/terms-and-conditions" style="display: inline-block; margin-right: 40px; white-space: pre;">Terms&nbsp;&amp;&nbsp;Conditions</a><a href="/privacy-policy" rel=" noopener">Privacy Policy</a></p>
+<script type="text/javascript">
+document.getElementById("copy-year").innerHTML = new Date().getFullYear();
+</script></span>
+ </div><!--end layout-widget-wrapper -->
+           </div><!--end widget-span -->
+<div class="span4 widget-span widget-type-cell " style="" data-widget-type="cell" data-x="8" data-w="4">
+
+<div class="row-fluid-wrapper row-depth-3 row-number-6 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="padding: 5px;" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_15839661916611349" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span class="hs-horizontal-spacer"></span></div>
+
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-7 ">
+            <div class="row-fluid ">
+<div class="span12 widget-span widget-type-rich_text desktop-right mobile-center" style="padding:0 20px; " data-widget-type="rich_text" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583965086168746" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text" style="" data-hs-cos-general-type="widget" data-hs-cos-type="rich_text"><a href="https://www.facebook.com/bluematadorinc/" rel="noopener" target="_blank"><img src="https://www.bluematador.com/hubfs/2020/footer/bm-facebook-logo.svg" alt="BM-Facebook" width="35"></a>&nbsp;<a href="https://www.linkedin.com/company/blue-matador-inc" rel="noopener" target="_blank"><img src="https://www.bluematador.com/hubfs/2020/footer/bm-linkedin-logo.svg" alt="BM-LinkedIn" width="35"></a><span>&nbsp;</span><a href="https://twitter.com/bluematadorinc" rel="noopener" target="_blank"><img src="https://www.bluematador.com/hubfs/2020/footer/bm-twitter-logo.svg" alt="BM-Twitter" width="35"></a>&nbsp;<a href="https://www.youtube.com/channel/UCjy2_6-CjS6E-0kz_LYNzLg" rel="noopener" target="_blank"><img src="https://www.bluematador.com/hubfs/2020/footer/bm-youtube-logo.svg" alt="BM-YouTube" width="35"></a></span>
+     </div><!--end layout-widget-wrapper -->
+               </div><!--end widget-span -->
+                </div><!--end row-->
+      </div><!--end row-wrapper -->
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-3 row-number-8 ">
+        <div class="row-fluid ">
+<div class="span12 widget-span widget-type-custom_widget " style="padding: 10px;" data-widget-type="custom_widget" data-x="0" data-w="12">
+<div id="hs_cos_wrapper_module_1583943767712976" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-space" style="" data-hs-cos-general-type="widget" data-hs-cos-type="module"><span class="hs-horizontal-spacer"></span></div>
+
+           </div><!--end widget-span -->
+            </div><!--end row-->
+  </div><!--end row-wrapper -->
+
+       </div><!--end widget-span -->
+        </div><!--end row-->
+</div><!--end row-wrapper -->
+
+   </div><!--end widget-span -->
+    </div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+<div class="row-fluid-wrapper row-depth-1 row-number-1 ">
+<div class="row-fluid ">
+<div class="span12 widget-span widget-type-raw_html " style="display:none;" data-widget-type="raw_html" data-x="0" data-w="12">
+<div class="cell-wrapper layout-widget-wrapper">
+<span id="hs_cos_wrapper_module_1583943767712977" class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_raw_html" style="" data-hs-cos-general-type="widget" data-hs-cos-type="raw_html"><!-- HubSpot Main JS -->
+<script src="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/template_assets/5389693890/1578503466231/Coded_files/Custom/page/Blue_Matador_Inc_October2017-theme/Blue_Matador_Inc_October2017-main.min.js"></script>
+<script>
+//parallax code
+(function($) {
+$.fn.parallax = function(options) {
+var windowHeight = $(window).height();
+// Establish default settings
+var settings = $.extend({
+speed: 0.15
+}, options);
+// Iterate over each object in collection
+return this.each(function() {
+// Save a reference to the element
+var $this = $(this);
+// Set up Scroll Handler
+$(document).scroll(function() {
+var scrollTop = $(window).scrollTop();
+var offset = $this.offset().top;
+var height = $this.outerHeight();
+// Check if above or below viewport
+if (offset + height <= scrollTop || offset >= scrollTop + windowHeight) {
+return;
+}
+var yBgPosition = Math.round((offset - scrollTop) * settings.speed);
+// Apply the Y Background Position to Set the Parallax Effect
+$this.css('background-position', 'center ' + 'calc(50% + '+ -(yBgPosition*.8)+'px)');
+});
+});
+}
+}(jQuery));
+//parallax code end
+$(document).ready(function() {
+if ((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1) {
+$('body').addClass('opera');
+} else if (navigator.userAgent.indexOf("Chrome") != -1) {
+$('body').addClass('chrome');
+} else if (navigator.userAgent.indexOf("Safari") != -1) {
+$('body').addClass('safari');
+} else if (navigator.userAgent.indexOf("Firefox") != -1) {
+$('body').addClass('firefox');
+} else if ((navigator.userAgent.indexOf("MSIE") != -1) || (!!document.documentMode == true)) //IF IE > 10
+{
+$('body').addClass('IE');
+} else {
+$('body').addClass('unknown');
+}
+});
+</script></span>
+</div><!--end layout-widget-wrapper -->
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+</div>
+</div><!--end widget-span -->
+</div><!--end row-->
+</div><!--end row-wrapper -->
+
+    </div><!--end footer -->
+</div><!--end footer wrapper -->
+
+    
+<!-- HubSpot performance collection script -->
+<script defer src="https://static.hsappstatic.net/content-cwv-embed/static-1.240/embed.js"></script>
+<script src="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/template_assets/6398501275/1578503467852/Coded_files/Custom/page/js/chocolat.min.js"></script>
+<script>
+var hsVars = hsVars || {}; hsVars['language'] = 'en-us';
+</script>
+
+<script src="/hs/hsstatic/cos-i18n/static-1.53/bundles/project.js"></script>
+<script src="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/module_assets/26165815909/1661334507019/module_26165815909_2020-header.min.js"></script>
+<script src="https://www.bluematador.com/hs-fs/hub/3917309/hub_generated/module_assets/28885060560/1590611250400/module_28885060560_Azul_Glossary_Navigation.min.js"></script>
+
+<!-- Start of HubSpot Analytics Code -->
+<script type="text/javascript">
+var _hsq = _hsq || [];
+_hsq.push(["setContentType", "standard-page"]);
+_hsq.push(["setCanonicalUrl", "https:\/\/www.bluematador.com\/learn\/kubectl-cheatsheet"]);
+_hsq.push(["setPageId", "29791267119"]);
+_hsq.push(["setContentMetadata", {
+    "contentPageId": 29791267119,
+    "legacyPageId": "29791267119",
+    "contentFolderId": null,
+    "contentGroupId": null,
+    "abTestId": null,
+    "languageVariantId": 29791267119,
+    "languageCode": "en-us",
+    
+}]);
+</script>
+
+<script type="text/javascript" id="hs-script-loader" async defer src="/hs/scriptloader/3917309.js"></script>
+<!-- End of HubSpot Analytics Code -->
+
+
+<script type="text/javascript">
+var hsVars = {
+    render_id: "3896db1d-39be-45cb-84cc-1fbab61cd38e",
+    ticks: 1690093916043,
+    page_id: 29791267119,
+    
+    content_group_id: 0,
+    portal_id: 3917309,
+    app_hs_base_url: "https://app.hubspot.com",
+    cp_hs_base_url: "https://cp.hubspot.com",
+    language: "en-us",
+    analytics_page_type: "standard-page",
+    analytics_page_id: "29791267119",
+    category_id: 1,
+    folder_id: 0,
+    is_hubspot_user: false
+}
+</script>
+
+
+<script defer src="/hs/hsstatic/HubspotToolsMenu/static-1.191/js/index.js"></script>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KXD6TMH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+    <script>
+$('.custom-menu-primary').addClass('js-enabled');
+    
+    /* Mobile button with three lines icon */
+        $('.custom-menu-primary .hs-menu-wrapper').before('<div class="mobile-trigger"><i></i></div>');
+        
+    /* Uncomment for mobile button that says 'MENU' 
+        $('.custom-menu-primary .hs-menu-wrapper').before('<div class="mobile-trigger">MENU</div>');
+    */
+    
+    $('.custom-menu-primary .flyouts .hs-item-has-children > a').after(' <div class="child-trigger"><i></i></div>');
+    $('.mobile-trigger').click(function() {
+        $(this).next('.custom-menu-primary .hs-menu-wrapper').slideToggle(250);
+        $('body').toggleClass('mobile-open');
+        $('.child-trigger').removeClass('child-open');
+        $('.custom-menu-primary .hs-menu-children-wrapper').slideUp(250);
+        return false;
+     });
+
+    $('.child-trigger').click(function() {
+        $(this).parent().siblings('.hs-item-has-children').find('.child-trigger').removeClass('child-open');
+        $(this).parent().siblings('.hs-item-has-children').find('.hs-menu-children-wrapper').slideUp(250);
+        $(this).next('.hs-menu-children-wrapper').slideToggle(250);
+        $(this).next('.hs-menu-children-wrapper').children('.hs-item-has-children').find('.hs-menu-children-wrapper').slideUp(250);
+        $(this).next('.hs-menu-children-wrapper').children('.hs-item-has-children').find('.child-trigger').removeClass('child-open');
+        $(this).toggleClass('child-open');
+        return false;
+    });
+
+    $(".child-trigger").hover(function() { $(this).parent().addClass("hover"); }, function() { $(this).parent().removeClass("hover"); });
+</script>
+<script>	
+$('.chocolat-container').Chocolat({
+  imageSize: 'contain'
+});
+</script>
+    <!-- Generated by the HubSpot Template Builder - template version 1.03 -->
+
+</body></html>

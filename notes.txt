@@ -1,0 +1,44 @@
+                            Kubernetes
+                        =================
+
+==> Kubernetes is a container management system developed by google.
+
+==> Kubernetes manages a containerized application in various types of environments...
+   
+
+           How to setup  master node and worker node in Kubernetes?
+
+    Steps:
+    ======
+
+        1.  To deactivate a swap space, use the command 
+
+              command: swapoff-a  
+
+        2.  super user permissions
+
+                command: sudo su 
+
+        3.  apt-get install -y kubelet kubeadm kubectl
+
+        4.  systemctl enable kubelet
+
+        5.  systemctl start kubelet
+
+Kubernetes    Architecture:
+============================
+
+==> Kubernetes use with kubectl command
+
+==>  Kubernetes contains 2 main things
+
+    Master  contains                           worker
+                                     
+ ==>  API Server                            ==>  kubelet
+
+ ==>  ETCD                                  ==>  k-proxy
+
+ ==> Schedular                              ==>  Nodes       (inside node kubelet and k-proxy)
+
+ ==> Control manager                        
+
