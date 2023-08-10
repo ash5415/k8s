@@ -40,5 +40,30 @@ Kubernetes    Architecture:
 
  ==> Schedular                              ==>  Nodes       (inside node kubelet and k-proxy)
 
- ==> Control manager                        
+ ==> Control manager 
 
+ pod checking :
+ =============
+
+ ==> if u want to login any specific container the command
+
+ command: kubectl exec -it <container name>
+
+ pod describe:
+ =============   
+
+ ==> if yoh want to check the details of the pod 
+       command: kubectl describe pod <pod name> 
+
+==> if it is multicontainer  pod   the command id 
+
+      command: kubectl exec -it <pod name> -c <container name> bash
+
+checking logs:
+=============
+==> if u want to check the log of the container
+ 
+command:
+
+      kubectl logs <pod name>
+      kubectl logs <pod name> -c <container name>

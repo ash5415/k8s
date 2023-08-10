@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multicontainerpod
+spec:
+  containers:
+    - name: webservercontainer1
+      image: nginx:latest
+    - name: webservercontainer2
+      image: tomcat:latest
+ 

@@ -86,7 +86,7 @@ To deploy pod network run any one of the below command on Master -->
 
 Either go with calico or flannel, just one command needs to be executed
 
- CALICO -->  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+ CALICO -->  kubectl apply -f =
  Flannel --> kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 ===============================================================================================================================================================
